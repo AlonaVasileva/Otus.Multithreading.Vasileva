@@ -37,8 +37,7 @@ namespace Otus.Multithreading.Vasileva
 
                 if (i == numThreads - 1)
                     end += remainder;
-
-                // Локальная переменная threadIndex для каждого потока
+                
                 int threadIndex = i;
 
                 var thread = new Thread(() =>
@@ -66,8 +65,8 @@ namespace Otus.Multithreading.Vasileva
         public static long SumArrayLinq(int[] arr)
         {
             return arr.AsParallel()
-                .Select(x => (long)x)  // Преобразуем каждый элемент в long
-                .Sum();  // Суммируем значения типа long
+                .Select(x => (long)x) 
+                .Sum(); 
         }
     }
 
