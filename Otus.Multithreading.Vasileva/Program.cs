@@ -1,12 +1,9 @@
 ﻿using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Otus.Multithreading.Vasileva
 {
@@ -58,7 +55,8 @@ namespace Otus.Multithreading.Vasileva
             TimeMeasurement.MeasureTime(() => SumCalculation.SumArrayLinq(array3), "LINQ", row3);
             allResults.Add(row3);
 
-            string filePath = "C:\\Users\\vasilevaea\\source\\repos\\Otus.Multithreading.Vasileva\\performance_results.xlsx";
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string filePath = Path.Combine(documentsPath, "Multithreading_results.xlsx");
             bool fileIsLocked = true;
             int maxRetries = 5;
             int retries = 0;
@@ -90,7 +88,6 @@ namespace Otus.Multithreading.Vasileva
                 // Если файл доступен, записываем результаты
                 try
                 {
-
                     using (var package = new ExcelPackage(new FileInfo(filePath)))
                     {
                         var worksheet = package.Workbook.Worksheets.FirstOrDefault(w => w.Name == "Results");
@@ -141,6 +138,5 @@ namespace Otus.Multithreading.Vasileva
             }
             Console.ReadKey();
         }
-
     }
 }
